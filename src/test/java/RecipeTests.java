@@ -15,6 +15,8 @@ import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 import org.testcontainers.shaded.com.fasterxml.jackson.databind.ObjectMapper;
 
+import java.util.List;
+
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @SpringBootTest(classes = RecipeDddExampleApplication.class)
@@ -30,7 +32,7 @@ public class RecipeTests {
 
     @Test
     public void itCreatesARecipe() throws Exception {
-        SaveRecipeRequest saveRecipeRequest = new SaveRecipeRequest("Testrecipe", "Description", null);
+        SaveRecipeRequest saveRecipeRequest = new SaveRecipeRequest("Testrecipe", "Description", null, List.of());
         ObjectMapper objectMapper = new ObjectMapper();
         mvc.perform(MockMvcRequestBuilders.post("/recipes")
                         .contentType(MediaType.APPLICATION_JSON)

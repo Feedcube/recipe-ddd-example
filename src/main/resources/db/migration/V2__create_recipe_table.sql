@@ -1,6 +1,6 @@
 CREATE TABLE IF NOT EXISTS recipe
 (
-    id          UUID NOT NULL,
+    id          varchar(255) NOT NULL,
     name        TEXT NOT NULL,
     description TEXT,
     image_url   TEXT,

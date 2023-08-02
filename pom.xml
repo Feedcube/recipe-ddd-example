@@ -18,7 +18,8 @@
         <archunit.version>1.0.1</archunit.version>
         <bytebuddy.version>1.14.4</bytebuddy.version>
         <jmolecules.version>2023.0.0</jmolecules.version>
-        <spring-modulith.version>0.6.0</spring-modulith.version>
+        <spring-modulith.version>1.1.0-SNAPSHOT</spring-modulith.version>
+
     </properties>
 
     <dependencyManagement>
@@ -45,8 +46,9 @@
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-jpa</artifactId>
+            <artifactId>spring-boot-starter-data-jdbc</artifactId>
         </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
@@ -154,19 +156,21 @@
 
         <!-- Moduliths -->
 
-        <dependency>
-            <groupId>org.springframework.experimental</groupId>
-            <artifactId>spring-modulith-starter-jpa</artifactId>
-            <version>0.6.0</version>
-        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.springframework.modulith/spring-modulith-starter-jdbc -->
+        <!-- https://mvnrepository.com/artifact/org.springframework.modulith/spring-modulith-events-jdbc -->
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.modulith</groupId>-->
+<!--            <artifactId>spring-modulith-starter-jpa</artifactId>-->
+<!--            <version>${spring-modulith.version}</version>-->
+<!--        </dependency>-->
 
 
-        <dependency>
-            <groupId>org.springframework.experimental</groupId>
-            <artifactId>spring-modulith-docs</artifactId>
-            <version>0.6.0</version>
-            <scope>test</scope>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.modulith</groupId>-->
+<!--            <artifactId>spring-modulith-docs</artifactId>-->
+<!--            <version>${spring-modulith.version}</version>-->
+<!--            <scope>test</scope>-->
+<!--        </dependency>-->
 
         <!-- https://mvnrepository.com/artifact/org.spockframework/spock-core -->
         <dependency>
@@ -212,21 +216,6 @@
                             <artifactId>lombok</artifactId>
                         </exclude>
                     </excludes>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>net.bytebuddy</groupId>
-                <artifactId>byte-buddy-maven-plugin</artifactId>
-                <version>${bytebuddy.version}</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>transform-extended</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <classPathDiscovery>true</classPathDiscovery>
                 </configuration>
             </plugin>
 

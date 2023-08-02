@@ -1,7 +1,8 @@
 package de.codecentric.recipedddexample.recipe.adapter.in.web;
 
-import de.codecentric.recipedddexample.recipe.adapter.in.web.model.RecipeCreatedResponse;
-import de.codecentric.recipedddexample.recipe.adapter.in.web.model.RecipeResponse;
+import de.codecentric.recipedddexample.recipe.adapter.in.web.model.out.RecipeCreatedResponse;
+import de.codecentric.recipedddexample.recipe.adapter.in.web.model.out.RecipeIngredientResponse;
+import de.codecentric.recipedddexample.recipe.adapter.in.web.model.out.RecipeResponse;
 import de.codecentric.recipedddexample.recipe.adapter.in.web.model.SaveRecipeRequest;
 import de.codecentric.recipedddexample.recipe.application.port.in.CreateRecipeUseCase;
 import de.codecentric.recipedddexample.recipe.application.port.in.GetRecipesUseCase;
@@ -30,7 +31,12 @@ public class RecipeController {
     @GetMapping
     public ResponseEntity<List<RecipeResponse>> get() {
         List<Recipe> recipes = this.getRecipesUseCase.getRecipes();
-        List<RecipeResponse> recipeResponses = recipes.stream().map(recipe -> new RecipeResponse(recipe.getId().id(), recipe.getName(), recipe.getDescription(), recipe.getImageUrl())).toList();
+        List<RecipeResponse> recipeResponses = recipes.stream()
+                .map(recipe -> {
+                    List<RecipeIngredientResponse> ingredients = recipe.getIngredients().stream().map(ingredient -> new RecipeIngredientResponse(ingredient.getName(), ingredient.getAmount().amount())).toList();
+                    return new RecipeResponse(recipe.getId().id(), recipe.getName(), recipe.getDescription(), recipe.getImageUrl(), ingredients);
+                })
+                .toList();
         return ResponseEntity.ok(recipeResponses);
     }
 }

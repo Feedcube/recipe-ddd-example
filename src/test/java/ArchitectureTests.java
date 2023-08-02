@@ -9,7 +9,7 @@ import org.jmolecules.ddd.types.ValueObject;
 
 import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.classes;
 
-@AnalyzeClasses(packages = "de.codecentric.recipedddexample")
+@AnalyzeClasses(packages = "de.codecentric.recipedddexample.*")
 class ArchitectureTests {
 
     @ArchTest
