@@ -1,6 +1,8 @@
 package de.codecentric.recipedddexample.recipe.domain.model;
 
 import de.codecentric.recipedddexample.recipe.domain.model.ingredient.RecipeIngredient;
+import jakarta.persistence.CollectionTable;
+import jakarta.persistence.ElementCollection;
 import jakarta.persistence.JoinColumn;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -25,13 +27,15 @@ public class Recipe  implements AggregateRoot<Recipe, Recipe.RecipeId> {
     @Setter
     private String imageUrl;
 
+    @CollectionTable(name = "recipe_ingredient")
+    @ElementCollection
     private List<RecipeIngredient> ingredients;
 
 
     public record RecipeId(UUID id) implements Identifier {}
 
-    public static Recipe create(String name, String description, String imageUrl) {
-        return Recipe.of(new RecipeId(UUID.randomUUID()), name, description, imageUrl, List.of());
+    public static Recipe create(String name, String description, String imageUrl, List<RecipeIngredient> ingredients) {
+        return Recipe.of(new RecipeId(UUID.randomUUID()), name, description, imageUrl, ingredients);
     }
 
 }

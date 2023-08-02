@@ -5,6 +5,6 @@ CREATE TABLE IF NOT EXISTS recipe_ingredient
     recipe_id uuid                   not null,
     name      TEXT                   NOT NULL,
     amount    double precision       not null,
-    unit      recipe_ingredient_unit not null,
+    unit      varchar not null,
     PRIMARY KEY (id)
 )
