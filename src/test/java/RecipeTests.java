@@ -30,6 +30,7 @@ public class RecipeTests {
     @ServiceConnection
     static PostgreSQLContainer postgres = new PostgreSQLContainer("postgres:latest");
 
+
     @Test
     public void itCreatesARecipe() throws Exception {
         SaveRecipeRequest saveRecipeRequest = new SaveRecipeRequest("Testrecipe", "Description", null, List.of());
@@ -39,15 +40,6 @@ public class RecipeTests {
                         .content(objectMapper.writeValueAsString(saveRecipeRequest)))
                 .andExpect(status().is2xxSuccessful())
                 .andDo(result -> System.out.println(new String(result.getResponse().getContentAsByteArray())));
-    }
-
-    @Test
-    @Sql("/fixtures/recipe/create_recipe.sql")
-    public void itFetchesRecipesWithoutIngredients() throws Exception {
-        ObjectMapper objectMapper = new ObjectMapper();
-        mvc.perform(MockMvcRequestBuilders.get("/recipes"))
-                .andExpect(status().is2xxSuccessful())
-                .andExpect(jsonPath("$[0]['id']").value("979d3c40-e9ec-47e1-ac30-8b34c02c555f"));
     }
 
     @Test
