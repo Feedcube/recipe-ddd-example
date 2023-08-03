@@ -1,6 +1,5 @@
 package de.codecentric.recipedddexample;
 
-import de.codecentric.recipedddexample.recipe.adapter.out.persistence.model.RecipeIngredientJdbc;
 import de.codecentric.recipedddexample.recipe.adapter.out.persistence.model.RecipeJdbc;
 import de.codecentric.recipedddexample.recipe.domain.model.Recipe;
 
@@ -33,6 +32,4 @@ public class RecipeDddExampleApplication {
            return recipe;
         };
     }
-
-
 }

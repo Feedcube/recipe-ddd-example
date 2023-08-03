@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class RecipeIngredientMapper {
     public RecipeIngredientJdbc domainToJdbc(RecipeIngredient ingredient) {
-        return new RecipeIngredientJdbc(ingredient.getId(), ingredient.getName(), ingredient.getAmount().amount(), ingredient.getAmount().unit());
+        return new RecipeIngredientJdbc(ingredient.getName(), ingredient.getAmount().amount(), ingredient.getAmount().unit());
     }
 
     public RecipeIngredient jdbcToDomain(RecipeIngredientJdbc ingredient) {

@@ -24,7 +24,7 @@ public class RecipeController {
 
     @PostMapping
     public ResponseEntity<RecipeCreatedResponse> create(@RequestBody SaveRecipeRequest saveRecipeRequest) {
-        Recipe createdRecipe = this.createRecipeUseCase.create(saveRecipeRequest.name(), saveRecipeRequest.description(), saveRecipeRequest.imageUrl());
+        Recipe createdRecipe = this.createRecipeUseCase.create(saveRecipeRequest);
         return ResponseEntity.ok(new RecipeCreatedResponse(createdRecipe.getId().id()));
     }
 

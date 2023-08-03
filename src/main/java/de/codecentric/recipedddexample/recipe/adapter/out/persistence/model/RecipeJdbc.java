@@ -23,6 +23,6 @@ public final class RecipeJdbc {
     private String name;
     private String description;
     private String imageUrl;
-    @MappedCollection(idColumn = "recipe", keyColumn = "id")
+    @MappedCollection(keyColumn = "recipe")
     private List<RecipeIngredientJdbc> ingredients;
 }

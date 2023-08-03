@@ -1,5 +1,6 @@
 package de.codecentric.recipedddexample.recipe.application.service;
 
+import de.codecentric.recipedddexample.recipe.adapter.in.web.model.SaveRecipeRequest;
 import de.codecentric.recipedddexample.recipe.application.port.in.CreateRecipeUseCase;
 import de.codecentric.recipedddexample.recipe.application.port.in.GetRecipesUseCase;
 import de.codecentric.recipedddexample.recipe.domain.model.Recipe;
@@ -16,8 +17,10 @@ import java.util.List;
 public class RecipeService implements CreateRecipeUseCase, GetRecipesUseCase {
     private final RecipeRepository recipeRepository;
     @Override
-    public Recipe create(String name, String description, String imageUrl) {
-        Recipe recipe = Recipe.create(null, name, description, imageUrl, List.of(RecipeIngredient.create("test", 1, RecipeIngredientUnit.GRAM)));
+    public Recipe create(SaveRecipeRequest recipeRequest) {
+        List<RecipeIngredient> ingredients = recipeRequest.ingredients().stream().map(ingredientRequest -> RecipeIngredient.create(ingredientRequest.name(), ingredientRequest.amount(), ingredientRequest.unit())).toList();
+
+        Recipe recipe = Recipe.create(null, recipeRequest.name(), recipeRequest.description(), recipeRequest.imageUrl(), ingredients);
         return recipeRepository.save(recipe);
     }
 

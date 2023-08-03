@@ -10,8 +10,6 @@ import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 
 @Data
-
-
 @Table(name = "recipe_ingredient")
 public class RecipeIngredientJdbc {
     @Id
@@ -22,8 +20,7 @@ public class RecipeIngredientJdbc {
     private RecipeJdbc recipe;
     private RecipeIngredientUnitJdbc unit;
 
-    public RecipeIngredientJdbc(Integer id, String name, double amount, RecipeIngredientUnit unit ) {
-        this.id = id;
+    public RecipeIngredientJdbc(String name, double amount, RecipeIngredientUnit unit ) {
         this.name = name;
         this.amount = amount;
         this.unit = RecipeIngredientUnitJdbc.of(unit);

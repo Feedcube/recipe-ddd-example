@@ -14,7 +14,6 @@ import java.util.UUID;
 @Getter
 @AllArgsConstructor(access = AccessLevel.PRIVATE, staticName = "of")
 public class RecipeIngredient implements ValueObject{
-    private Integer id;
     private String name;
 
     private Amount amount;
@@ -22,7 +21,7 @@ public class RecipeIngredient implements ValueObject{
     public record Amount(double amount, RecipeIngredientUnit unit) implements ValueObject {}
 
     public static RecipeIngredient create(String name, double amount, RecipeIngredientUnit unit) {
-        return RecipeIngredient.of(null, name, new Amount(amount, unit));
+        return RecipeIngredient.of(name, new Amount(amount, unit));
     }
 
 
