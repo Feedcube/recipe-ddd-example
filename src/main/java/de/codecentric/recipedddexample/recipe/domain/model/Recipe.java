@@ -26,7 +26,6 @@ public class Recipe implements org.jmolecules.ddd.types.AggregateRoot<Recipe, Re
 
     private List<RecipeIngredient> ingredients;
 
-
     public record RecipeId(UUID id) implements Identifier {}
 
     public static Recipe create(UUID id, String name, String description, String imageUrl, List<RecipeIngredient> ingredients) {

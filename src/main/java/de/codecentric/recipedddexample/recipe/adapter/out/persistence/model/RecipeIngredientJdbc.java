@@ -20,12 +20,12 @@ public class RecipeIngredientJdbc {
     private double amount;
     @Transient
     private RecipeJdbc recipe;
-    private RecipeIngredientUnit unit;
+    private RecipeIngredientUnitJdbc unit;
 
-    public RecipeIngredientJdbc(Integer id, String name) {
+    public RecipeIngredientJdbc(Integer id, String name, double amount, RecipeIngredientUnit unit ) {
         this.id = id;
         this.name = name;
-        this.amount = 4;
-        this.unit = RecipeIngredientUnit.GRAM;
+        this.amount = amount;
+        this.unit = RecipeIngredientUnitJdbc.of(unit);
     }
 }

@@ -23,8 +23,7 @@ public class RecipeRepositoryImpl implements RecipeRepository {
 
     @Override
     public List<Recipe> findAll() {
-        return StreamSupport
-                .stream(recipeJpaRepository.findAll().spliterator(), false)
+        return recipeJpaRepository.findAll().stream()
                 .map(recipeMapper::jdbcToDomain).toList();
     }
 }
