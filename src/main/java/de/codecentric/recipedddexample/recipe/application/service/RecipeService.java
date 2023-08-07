@@ -17,10 +17,10 @@ import java.util.List;
 public class RecipeService implements CreateRecipeUseCase, GetRecipesUseCase {
     private final RecipeRepository recipeRepository;
     @Override
-    public Recipe create(SaveRecipeRequest recipeRequest) {
-        List<RecipeIngredient> ingredients = recipeRequest.ingredients().stream().map(ingredientRequest -> RecipeIngredient.create(ingredientRequest.name(), ingredientRequest.amount(), ingredientRequest.unit())).toList();
+    public Recipe create(CreateRecipeCommand createRecipeCommand) {
+        List<RecipeIngredient> ingredients = createRecipeCommand.ingredients().stream().map(ingredientRequest -> RecipeIngredient.create(ingredientRequest.name(), ingredientRequest.amount(), ingredientRequest.unit())).toList();
 
-        Recipe recipe = Recipe.create(null, recipeRequest.name(), recipeRequest.description(), recipeRequest.imageUrl(), ingredients);
+        Recipe recipe = Recipe.create(null, createRecipeCommand.name(), createRecipeCommand.description(), createRecipeCommand.imageUrl(), ingredients);
         return recipeRepository.save(recipe);
     }
 

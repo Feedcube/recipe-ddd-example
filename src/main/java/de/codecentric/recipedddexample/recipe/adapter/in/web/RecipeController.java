@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import static de.codecentric.recipedddexample.recipe.application.port.in.CreateRecipeUseCase.*;
+
 @PrimaryAdapter
 @RestController
 @RequestMapping("/recipes")
@@ -24,7 +26,9 @@ public class RecipeController {
 
     @PostMapping
     public ResponseEntity<RecipeCreatedResponse> create(@RequestBody SaveRecipeRequest saveRecipeRequest) {
-        Recipe createdRecipe = this.createRecipeUseCase.create(saveRecipeRequest);
+        List<CreateRecipeIngredientCommand> ingredientCommands = saveRecipeRequest.ingredients().stream().map(ingredientRequest -> new CreateRecipeIngredientCommand(ingredientRequest.name(), ingredientRequest.amount(), ingredientRequest.unit())).toList();
+        CreateRecipeCommand createRecipeCommand = new CreateRecipeCommand(saveRecipeRequest.name(), saveRecipeRequest.description(), saveRecipeRequest.imageUrl(), ingredientCommands);
+        Recipe createdRecipe = this.createRecipeUseCase.create(createRecipeCommand);
         return ResponseEntity.ok(new RecipeCreatedResponse(createdRecipe.getId().id()));
     }
 
